@@ -30,7 +30,7 @@ export function romanizeTamil(s) {
 export function norm(x) {
   return (x || '')
     .toLowerCase()
-    .replace(/[^a-z0-9\u0B80-\u0BFF ]+/g, ' ')
+    .replace(/[^a-z0-9\u0B80-\u0BFF\u0900-\u097F ]+/g, ' ')
     .replace(/h/g, '')
     .replace(/z/g, 'l')
     .replace(/w/g, 'v')

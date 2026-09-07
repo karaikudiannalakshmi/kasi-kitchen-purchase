@@ -211,16 +211,17 @@ export default function Ingredients() {
       <div className="card table-wrap">
         <table>
           <thead>
-            <tr><th>Name</th><th>Category</th><th>Unit</th><th style={{ width: 1 }} /></tr>
+            <tr><th>Name (Hindi)</th><th>English</th><th>Category</th><th>Unit</th><th style={{ width: 1 }} /></tr>
           </thead>
           <tbody>
             {loading ? (
-              <tr><td colSpan={4} className="empty">Loading…</td></tr>
+              <tr><td colSpan={5} className="empty">Loading…</td></tr>
             ) : filtered.length === 0 ? (
-              <tr><td colSpan={4} className="empty">No ingredients match.</td></tr>
+              <tr><td colSpan={5} className="empty">No ingredients match.</td></tr>
             ) : filtered.map((i) => (
               <tr key={i.id}>
                 <td style={{ fontWeight: 600 }}>{i.name}</td>
+                <td className="muted">{i.search || '—'}</td>
                 <td><Cat k={i.category} /></td>
                 <td className="muted">{i.unit}</td>
                 <td style={{ whiteSpace: 'nowrap' }}>

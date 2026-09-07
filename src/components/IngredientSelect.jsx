@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ingredientMatches, phoneticOf } from '../lib/ingredientSearch';
+import { ingredientMatches } from '../lib/ingredientSearch';
 import { useCategories } from '../contexts/CategoriesContext';
 import { Cat } from './Cat';
 
@@ -45,7 +45,7 @@ export default function IngredientSelect({ ingredients, value, onPick, placehold
   return (
     <div className="combo" ref={wrapRef}>
       <button type="button" className={`combo-btn ${selected ? '' : 'ph'}`} onClick={() => setOpen((o) => !o)}>
-        <span className="combo-val">{selected ? selected.name : placeholder}</span>
+        <span className="combo-val">{selected ? (selected.search ? `${selected.name} (${selected.search})` : selected.name) : placeholder}</span>
         {selected && <Cat k={selected.category} />}
         <span className="combo-caret">▾</span>
       </button>
@@ -58,7 +58,7 @@ export default function IngredientSelect({ ingredients, value, onPick, placehold
             value={q}
             onChange={(e) => setQ(e.target.value)}
             onKeyDown={onKey}
-            placeholder="Type English (thakkali) or Tamil…"
+            placeholder="Type English or Hindi…"
           />
           <div className="combo-list">
             {results.length === 0 ? (
@@ -73,7 +73,7 @@ export default function IngredientSelect({ ingredients, value, onPick, placehold
                 <span className="cat-dot" style={{ background: cats.color(i.category) }} />
                 <span className="combo-name">
                   {i.name}
-                  {phoneticOf(i) && <span className="combo-ph"> · {phoneticOf(i)}</span>}
+                  {i.search && <span className="combo-ph"> · {i.search}</span>}
                 </span>
                 <Cat k={i.category} />
                 <span className="combo-unit">{i.unit}</span>
